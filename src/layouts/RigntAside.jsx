@@ -2,6 +2,7 @@ import React from 'react';
 import SocialLogin from './SocialLogin';
 import FindUs from './FindUs';
 import Qzone from './Qzone';
+import UnderUs from './UnderUs';
 
 const RigntAside = () => {
     return (
@@ -9,6 +10,7 @@ const RigntAside = () => {
             <SocialLogin></SocialLogin>
             <FindUs></FindUs>
             <Qzone></Qzone>
+            <UnderUs></UnderUs>
         </div>
     );
 };
