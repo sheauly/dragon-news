@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
+    const { createUser, setUser } = use(AuthContext); 
+    const [nameError, setNameError] = useState("");
     const handleRegister = (e) => {
+        
         e.preventDefault();
         console.log(e.target)
         const form = e.target;
         const name = form.name.value;
+        if (name.length < 5) {
+            setNameError("Name should be more then 5 character")
+            return;
+        }
+        else {
+            setNameError("");
+        }
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
         console.log({ name, photo, email, password })
+        createUser(email, password)
+        .then(result => {
+            const user = result.user;
+            // console.log(user)
+            setUser(user)
+        })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage, errorCode)
+        })
     }
     return (
         <div className='flex justify-center items-center'>
@@ -22,6 +44,10 @@ const Register = () => {
                         {/* name */}
                         <label className="label">Name</label>
                         <input name='name' type="text" className="input" placeholder="name" required />
+
+                        {
+                            nameError && <p className='text-red-400 text-xs'>{nameError}</p>
+                        }
                         {/* photo Url */}
 
                         <label className="label">Photo Url</label>

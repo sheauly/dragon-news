@@ -7,7 +7,7 @@ const CategoryNews = () => {
     const data = useLoaderData();
 
     const [categoryNews, setCategoryNews] = useState([]);
-    
+
     useEffect(() => {
         if (id == "0") {
             setCategoryNews(data);
@@ -25,13 +25,13 @@ const CategoryNews = () => {
     }, [id, data])
     return <div className='font-bold mb-5'>
         <h2>Total <span className='text-secondary'>{categoryNews.length}</span> news Found</h2>
-        <div className='grid grid-cols-1'>
+        <div className='grid grid-cols-1 ga-5'>
             {
                 categoryNews.map(news => <NewsCard key={news.id} news={news}></NewsCard>)
             }
         </div>
     </div>
-   
+
 };
 
 export default CategoryNews;
